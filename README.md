@@ -1,15 +1,13 @@
-# 8 Week SQL Challenge
+# Danny's Diner SQL Analysis
 
-This repository contains my solutions to the SQL case studies from the 8 Week SQL Challenge.
+This project analyzes customer behavior using SQL.
 
-## Case Studies
+Dataset includes:
+- sales
+- menu
+- members
 
-| Case Study | Description | Link |
-|------------|-------------|------|
-| Danny's Diner | Customer spending analysis | [View Project](case-studies/dannys-diner) |
-| Pizza Runner | Pizza delivery analytics | [View Project](case-studies/pizza-runner) |
-
-## Tools Used
-- SQL
-- PostgreSQL
-- Data Analysis
+Goals:
+- find total spending per customer
+- identify most popular menu items
+- analyze ordering behavior
