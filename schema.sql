@@ -1,3 +1,6 @@
+CREATE DATABASE dannys_diner;
+USE dannys_diner;
+
 CREATE TABLE sales (
 customer_id VARCHAR(1),
 order_date DATE,
