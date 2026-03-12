@@ -70,15 +70,32 @@ order by 1;
 
 ```sql
 
+select s.customer_id, m.product_name
+from sales s
+join menu m 
+on s.product_id=m.product_id
+where s.order_date in (
+  select min(order_date)
+  from sales
+  where customer_id=s.customer_id
+  )
+  order by customer_id;
+```
 
+### Result set:
+| customer_id | Product_name |
+| ----------- | ------------ |
+| A           | Sushi        |
+| A           | Curry        |
+| B           | Curry        |
+| C           | Ramen        |
+| C           | Ramen        |
 
+---
 
+### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
-
-
-
-
-
+```sql
 
 
 
