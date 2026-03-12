@@ -16,3 +16,19 @@
 i. Join all the things
 
 ii. Rank all the things
+
+## Solutions:
+
+Let's collaborate on running the queries using PostgreSQL on [DB Fiddle](https://www.db-fiddle.com/). It'll be fantastic to team up and tackle the questions together!!
+
+
+
+
+
+
+
+
+
+
+
+
