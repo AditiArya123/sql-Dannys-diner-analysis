@@ -35,9 +35,9 @@ INSERT INTO sales VALUES
 ('C','2021-01-07',3);
 
 insert into menu values 
-('1', 'Sushi', '10'),
-('2', 'Curry', '15'),
-('3', 'Ramen', '12');
+(1, 'Sushi', '10'),
+(2, 'Curry', '15'),
+(3, 'Ramen', '12');
 
 insert into members values
 ('A', '2021-01-07'),
