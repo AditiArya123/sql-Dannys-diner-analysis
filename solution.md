@@ -30,6 +30,7 @@ Let's collaborate on running the queries using MySQL on [DB Fiddle](https://www.
 ----
 
 ### 1. What is the total amount each customer spent at the restaurant?
+
 ```sql
 select s.customer_id, sum(m.price) as total_amount
 from menu m join sales s on m.product_id=s.product_id
@@ -69,7 +70,6 @@ order by 1;
 ### 3. What was the first item from the menu purchased by each customer?
 
 ```sql
-
 select s.customer_id, m.product_name
 from sales s
 join menu m 
@@ -83,6 +83,7 @@ where s.order_date in (
 ```
 
 ### Result set:
+
 | customer_id | Product_name |
 | ----------- | ------------ |
 | A           | Sushi        |
@@ -96,18 +97,30 @@ where s.order_date in (
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 ```sql
+select m.product_name, count(*) as purchase_count
+from sales s
+join menu m
+on s.product_id=m.product_id
+group by m.product_name
+order by purchase_count desc
+limit 1;
+```
+### Result set:
+
+| product_name | purchase_count |
+| ------------ | -------------- |
+| Ramen        | 8              |
+
+---
+
+### 5. Which item was the most popular for each customer?
+
+```sql
 
 
 
 
-
-
-
-
-
-
-
-
+```
 
 
 
