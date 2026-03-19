@@ -1,4 +1,4 @@
-## Case Study Questions
+# Case Study Questions
 
 1. What is the total amount each customer spent at the restaurant?
 2. How many days has each customer visited the restaurant?
@@ -30,7 +30,7 @@ Let's collaborate on running the queries using MySQL on [DB Fiddle](https://www.
 ----
 
 ### 1. What is the total amount each customer spent at the restaurant?
-
+Helps identify high-value customers and revenue contribution by user segment.
 ```sql
 select s.customer_id, sum(m.price) as total_amount
 from menu m join sales s on m.product_id=s.product_id
@@ -49,7 +49,7 @@ order by 1;
 ---
 
 ### 2. How many days has each customer visited the restaurant?
-
+Measures customer engagement and visit frequency to understand loyalty patterns.
 ```sql
 select customer_id, count(distinct order_date) as visit_count
 from sales
@@ -68,7 +68,7 @@ order by 1;
 ---
 
 ### 3. What was the first item from the menu purchased by each customer?
-
+Identifies first-touch product experience, which can influence retention and preferences.
 ```sql
 select s.customer_id, m.product_name
 from sales s
@@ -95,7 +95,7 @@ where s.order_date in (
 ---
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
-
+Highlights top-performing products driving overall demand and revenue.
 ```sql
 select m.product_name, count(*) as purchase_count
 from sales s
@@ -114,7 +114,7 @@ limit 1;
 ---
 
 ### 5. Which item was the most popular for each customer?
-
+Reveals individual customer preferences for personalization and targeted recommendations.
 ```sql
 
 
