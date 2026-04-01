@@ -116,23 +116,87 @@ limit 1;
 ### 5. Which item was the most popular for each customer?
 Reveals individual customer preferences for personalization and targeted recommendations.
 ```sql
-
-
-
-
+SELECT s.customer_id, m.product_name, COUNT(*) AS order_count
+FROM sales s
+JOIN menu m
+ON s.product_id = m.product_id
+GROUP BY s.customer_id, m.product_name
+HAVING COUNT(*) = (
+    SELECT MAX(cnt)
+    FROM (
+        SELECT COUNT(*) AS cnt
+        FROM sales s2
+        WHERE s2.customer_id = s.customer_id
+        GROUP BY s2.product_id
+    ) t
+);
 ```
+#### Result set:
+
+| customer_id | product_name | order_count |
+| ----------- | ------------ | ----------- |
+| A           | ramen        | 3           |
+| B           | ramen        | 2           |
+| B           | curry        | 2           |
+| B           | sushi        | 2           |
+| C           | ramen        | 3           |
 
 
+### 6. Which item was purchased first by the customer after they became a member?
 
+```sql
+SELECT customer_id, product_name, order_date
+FROM (
+    SELECT s.customer_id,
+           m.product_name,
+           s.order_date,
+           ROW_NUMBER() OVER (
+               PARTITION BY s.customer_id 
+               ORDER BY s.order_date
+           ) AS rn
+    FROM sales s
+    JOIN members mem
+        ON s.customer_id = mem.customer_id
+    JOIN menu m
+        ON s.product_id = m.product_id
+    WHERE s.order_date >= mem.join_date
+) t
+WHERE rn = 1;
+```
+#### Result set:
 
+| customer_id | product_name | order_date |
+| ----------- | ------------ | ---------- |
+| A           | curry        | 2021-01-07 |
+| B           | sushi        | 2021-01-11 |
 
+### 7. Which item was purchased just before the customer became a member?
 
-
-
-
-
-
-
+```sql
+SELECT customer_id, product_name, order_date
+FROM (
+    SELECT s.customer_id,
+           m.product_name,
+           s.order_date,
+           ROW_NUMBER() OVER (
+               PARTITION BY s.customer_id 
+               ORDER BY s.order_date DESC
+           ) AS rn
+    FROM sales s
+    JOIN members mem
+        ON s.customer_id = mem.customer_id
+    JOIN menu m
+        ON s.product_id = m.product_id
+    WHERE s.order_date < mem.join_date
+) t
+WHERE rn = 1;
+```
+### result
+| customer_id | product_name | order_date  |
+| ----------- | ------------ | ----------- |
+| A           | sushi        | 2021-01-01  |
+| A           | curry        | 2021-01-01  |
+| B           | sushi        | 2021-01-04  |
 
 
 
